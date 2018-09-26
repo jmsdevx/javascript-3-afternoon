@@ -21,7 +21,11 @@ const mixedNumbers = [6,3,1,7,5,2,6,8,9,4,2,7,9,3,1,8,4,3];
 */
 
 //Code Here
-let evenNumbers // = mixedNumbers.filter(/* Provide Your Callback Here */)
+let evenNumbers = mixedNumbers.filter(function(c,i,a){
+  if (c % 2 === 0) {
+    return a[i];
+  }
+})
 
 
 
@@ -44,7 +48,9 @@ const prices = [15.00, 23.00, 78.00, 34.00, 12.00, 86.00, 12.00, 79.00, 32.00];
 */
 
 //Code Here
-let postTaxPrices // = prices.map(/* Provide Your Callback Here );
+let postTaxPrices = prices.map(function(c, i, a){
+  c *= 1.07;
+})
 
 
 
@@ -63,7 +69,10 @@ const populations = [8175133, 3792621, 2695598, 2100263];
 */
 
 //Code Here
-let totalPopulation //  = populations.reduce(/* Provide Your Callback Here */)
+let totalPopulation = populations.reduce(function(t,c,i,a){
+  return t + c;
+
+},0)
 
 
 
@@ -89,7 +98,12 @@ const monstersInYourPocket = [{"monster":"Bulbabunny","CP":156},{"monster":"Bulb
 */
 
 //Code Here
-let myStrongest // = monstersInYourPocket.filter(/* Provide Your Callback Here */)
+let myStrongest = monstersInYourPocket.filter((function(c, i, a){
+  if(c['CP'] > 200){
+    return c['monster'];
+  }
+
+}))
 
 
 
@@ -106,7 +120,12 @@ const orders = [{"price":15,"tax":0.09},{"price":42,"tax":0.07},{"price":56,"tax
   Use a higher order method to get all the order totals after adding in the sales tax. Your answer should be an array of numbers, one total for each order.
 */
 
-let orderTotals // Code here
+let orderTotals = orders.map(function(c, i, a){
+  let price = c['price']
+  let tax = 1 + c['tax']
+  return price * tax
+})
+
 
 
 
@@ -126,6 +145,24 @@ const purchases = [{"owner":"Barry","price":103},{"owner":"Bob","price":75},
   Use a high order method to create to get the sum of bobsTotal.
 */
 
-let bobsTotal //Code Here
+//This is the answer I eventually landed at
+
+let bobsTotal = purchases.filter(function(c,i,a){
+  if (c.owner === 'Bob') {
+    return c.price}})
+    .reduce(function(t,c){
+      return t + c.price
+}, 0)
+
+
+//Can't figure out why this won't work, something to do with IF in REDUCE?
+
+// let bobsTotal = purchases.reduce(function(t, c) {
+//   if (c['owner']=== 'Bob') {
+//     return t += c['price'];
+//   }
+// },0)
+
+
 
 
